@@ -11,7 +11,7 @@ az ad app create --display-name "adv-tech-days-app"
 az ad app credential reset --id "<app id>" --years 2
 az ad sp create --id "<app id>"
 
-----Update parameters.json file to add objectId from outcome
+--Update parameters.json file to add objectId from outcome
 
 --Deploy initial cloud evironment services
 az deployment group create --resource-group "adv-tech-days" --template-file environment.bicep --parameters parameters.json
