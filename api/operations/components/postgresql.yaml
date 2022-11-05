@@ -1,0 +1,14 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: postgresqlapp
+spec:
+  type: state.postgresql
+  version: v1
+  metadata:
+  - name: connectionString
+    secretKeyRef:
+      name: cosmosdb-masterKey
+      key:  cosmosdb-masterKey
+auth:
+  secretStore: azurekeyvault

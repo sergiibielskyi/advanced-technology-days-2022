@@ -22,3 +22,6 @@ dotnet user-secrets init
 dotnet user-secrets set "AzureBlobStorage:ConnectionString" "<Connection String>"
 dotnet user-secrets set "ACosmosDB:Endpoint" "<Connection String>"
 dotnet user-secrets set "CosmosDB:Token" "<Connection String>"
+
+docker build --platform linux/amd64 -t delivery:latest -f ./delivery/dockerfile .
+docker build --platform linux/amd64 -t operatons:latest -f ./operations/dockerfile .

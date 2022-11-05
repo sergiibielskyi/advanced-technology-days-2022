@@ -1,0 +1,22 @@
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /api
+EXPOSE 80
+
+# copy csproj and restore as distinct layers
+WORKDIR /api/operations
+COPY ./operations/operations.csproj ./
+RUN dotnet restore
+
+# copy everything else and build app
+WORKDIR /api
+COPY ./operations/ ./operations/
+
+WORKDIR /api/operations
+RUN dotnet publish -c release -o operations -r ubuntu.18.04-x64
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+COPY --from=build / ./
+WORKDIR /api/operations
+ENTRYPOINT ["dotnet", "bin/release/net6.0/ubuntu.18.04-x64/operations.dll"]

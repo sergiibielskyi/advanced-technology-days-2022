@@ -36,3 +36,5 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 devops/infra/parameters.json
+api/delivery/components/azurekeyvault.yaml
+api/operations/components/azurekeyvault.yaml

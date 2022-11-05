@@ -1,0 +1,21 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: cosmosdbapp
+  namespace: default
+spec:
+  type: state.azure.cosmosdb
+  version: v1
+  metadata:
+  - name: url
+    value: https://advtechcosmosdb.documents.azure.com:443/
+  - name: masterKey
+    secretKeyRef:
+      name: cosmosdb-masterKey
+      key:  cosmosdb-masterKey
+  - name: database
+    value: advtechDB
+  - name: collection
+    value: advtechContainer
+auth:
+  secretStore: azurekeyvault

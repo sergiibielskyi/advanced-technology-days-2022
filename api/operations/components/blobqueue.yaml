@@ -1,0 +1,23 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: blobqueue
+  namespace: default
+spec:
+  type: bindings.azure.storagequeues
+  version: v1
+  metadata:
+  - name: storageAccount
+    value: "advtechstorage"
+  - name: storageAccessKey
+    secretKeyRef:
+      name: blob-masterKey
+      key:  blob-masterKey
+  - name: queue
+    value: "orders"
+  - name: ttlInSeconds
+    value: "60"
+  - name: decodeBase64
+    value: "false"
+auth:
+  secretStore: azurekeyvault
