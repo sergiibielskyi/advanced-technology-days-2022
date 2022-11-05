@@ -198,7 +198,7 @@ resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@20
 }
 
 resource queue 'Microsoft.Storage/storageAccounts/queueServices/queues@2021-08-01' = {
-  name: '${blobStorage.name}/default/objects'
+  name: '${blobStorage.name}/default/orders'
   properties: {
     metadata: {}
   }

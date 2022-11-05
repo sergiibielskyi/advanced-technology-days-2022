@@ -17,3 +17,8 @@ az ad sp create --id "<app id>"
 az deployment group create --resource-group "adv-tech-days" --template-file environment.bicep --parameters parameters.json
 
 --Add permissions to accout and generate certificate
+
+dotnet user-secrets init
+dotnet user-secrets set "AzureBlobStorage:ConnectionString" "<Connection String>"
+dotnet user-secrets set "ACosmosDB:Endpoint" "<Connection String>"
+dotnet user-secrets set "CosmosDB:Token" "<Connection String>"
