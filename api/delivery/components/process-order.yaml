@@ -1,0 +1,22 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: process-order
+spec:
+  type: bindings.azure.storagequeues
+  version: v1
+  metadata:
+  - name: accountName
+    value: "advtechstorage"
+  - name: accountKey
+    secretKeyRef:
+      name: blob-masterKey
+      key:  blob-masterKey
+  - name: queueName
+    value: "orders"
+  - name: ttlInSeconds
+    value: "60"
+  - name: decodeBase64
+    value: "false"
+auth:
+  secretStore: azurekeyvault

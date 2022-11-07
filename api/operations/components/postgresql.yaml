@@ -8,7 +8,7 @@ spec:
   metadata:
   - name: connectionString
     secretKeyRef:
-      name: cosmosdb-masterKey
-      key:  cosmosdb-masterKey
+      name: postgresql-connectionString
+      key:  postgresql-connectionString
 auth:
   secretStore: azurekeyvault

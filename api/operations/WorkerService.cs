@@ -49,8 +49,8 @@ public class WorkerService : BackgroundService
 
             if (retrievedMessage.Count() != 0)
             {
-                var base64EncodedBytes = System.Convert.FromBase64String(Encoding.UTF8.GetString(retrievedMessage[0].Body));
-                string invoce = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+                //var base64EncodedBytes = System.Convert.FromBase64String(Encoding.UTF8.GetString(retrievedMessage[0].Body));
+                string invoce = System.Text.Encoding.UTF8.GetString(retrievedMessage[0].Body);
                 var order = JsonConvert.DeserializeObject<dynamic>(invoce);
 
                 // Display the message

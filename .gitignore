@@ -38,3 +38,4 @@ jspm_packages
 devops/infra/parameters.json
 api/delivery/components/azurekeyvault.yaml
 api/operations/components/azurekeyvault.yaml
+api/operations/components/cert.pfx

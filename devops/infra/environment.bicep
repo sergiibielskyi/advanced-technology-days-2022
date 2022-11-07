@@ -22,6 +22,7 @@ param tenantId string = subscription().tenantId
 param objectId string = '@objectId'
 param secretNameCosmosDB string = 'cosmosdb-masterKey'
 param secretNameBlob string = 'blob-masterKey'
+param secretNamePostgresql string = 'postgresql-connectionString'
 param serverName string = '@serverName'
 param administratorLogin string = '@administratorLogin'
 @secure()
@@ -39,6 +40,8 @@ param subnetName string = 'azure_postgresql_subnet'
 param virtualNetworkRuleName string = 'AllowSubnet'
 param vnetAddressPrefix string = '10.0.0.0/16'
 param subnetPrefix string = '10.0.0.0/16'
+@secure()
+param secretValuePostgresql string = '@connectionStringPostgre'
 
 
 //Create App Env
@@ -208,9 +211,84 @@ resource queue 'Microsoft.Storage/storageAccounts/queueServices/queues@2021-08-0
   ]
 }
 
+//Create PostgreSQL
+var firewallrules = [
+  {
+    Name: 'rule1'
+    StartIpAddress: '0.0.0.0'
+    EndIpAddress: '255.255.255.255'
+  }
+  {
+    Name: 'rule2'
+    StartIpAddress: '0.0.0.0'
+    EndIpAddress: '255.255.255.255'
+  }
+]
+
+resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
+  name: virtualNetworkName
+  location: location
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        vnetAddressPrefix
+      ]
+    }
+  }
+}
+
+resource subnet 'Microsoft.Network/virtualNetworks/subnets@2021-05-01' = {
+  parent: vnet
+  name: subnetName
+  properties: {
+    addressPrefix: subnetPrefix
+  }
+}
+
+resource postgreserver 'Microsoft.DBforPostgreSQL/servers@2017-12-01' = {
+  name: serverName
+  location: location
+  sku: {
+    name: sku
+    tier: skuTier
+    capacity: skuCapacity
+    size: '${skuSizeMB}'
+    family: skuFamily
+  }
+  properties: {
+    createMode: 'Default'
+    version: postgresqlVersion
+    administratorLogin: administratorLogin
+    administratorLoginPassword: administratorLoginPassword
+    storageProfile: {
+      storageMB: skuSizeMB
+      backupRetentionDays: backupRetentionDays
+      geoRedundantBackup: geoRedundantBackup
+    }
+  }
+
+  resource virtualNetworkRule 'virtualNetworkRules@2017-12-01' = {
+    name: virtualNetworkRuleName
+    properties: {
+      virtualNetworkSubnetId: subnet.id
+      ignoreMissingVnetServiceEndpoint: true
+    }
+  }
+}
+
+@batchSize(1)
+resource firewallRules 'Microsoft.DBforPostgreSQL/servers/firewallRules@2017-12-01' = [for rule in firewallrules: {
+  name: '${postgreserver.name}/${rule.Name}'
+  properties: {
+    startIpAddress: rule.StartIpAddress
+    endIpAddress: rule.EndIpAddress
+  }
+}]
+
 //Create Key Vault
 var secretValueCosmosDB = listKeys(accountName_resource.id, accountName_resource.apiVersion).primaryMasterKey
 var secretValueBlob = blobStorage.listKeys().keys[0].value
+
 
 param secretPermissions array = [
   'GET'
@@ -268,76 +346,12 @@ resource secretBlob 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
   }
 }
 
-//Create PostgreSQL
-var firewallrules = [
-  {
-    Name: 'rule1'
-    StartIpAddress: '0.0.0.0'
-    EndIpAddress: '255.255.255.255'
-  }
-  {
-    Name: 'rule2'
-    StartIpAddress: '0.0.0.0'
-    EndIpAddress: '255.255.255.255'
-  }
-]
-
-resource vnet 'Microsoft.Network/virtualNetworks@2021-05-01' = {
-  name: virtualNetworkName
-  location: location
+resource secretPostgresql 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
+  parent: kv
+  name: secretNamePostgresql
   properties: {
-    addressSpace: {
-      addressPrefixes: [
-        vnetAddressPrefix
-      ]
-    }
+    value: secretValuePostgresql
   }
 }
 
-resource subnet 'Microsoft.Network/virtualNetworks/subnets@2021-05-01' = {
-  parent: vnet
-  name: subnetName
-  properties: {
-    addressPrefix: subnetPrefix
-  }
-}
 
-resource server 'Microsoft.DBforPostgreSQL/servers@2017-12-01' = {
-  name: serverName
-  location: location
-  sku: {
-    name: sku
-    tier: skuTier
-    capacity: skuCapacity
-    size: '${skuSizeMB}'
-    family: skuFamily
-  }
-  properties: {
-    createMode: 'Default'
-    version: postgresqlVersion
-    administratorLogin: administratorLogin
-    administratorLoginPassword: administratorLoginPassword
-    storageProfile: {
-      storageMB: skuSizeMB
-      backupRetentionDays: backupRetentionDays
-      geoRedundantBackup: geoRedundantBackup
-    }
-  }
-
-  resource virtualNetworkRule 'virtualNetworkRules@2017-12-01' = {
-    name: virtualNetworkRuleName
-    properties: {
-      virtualNetworkSubnetId: subnet.id
-      ignoreMissingVnetServiceEndpoint: true
-    }
-  }
-}
-
-@batchSize(1)
-resource firewallRules 'Microsoft.DBforPostgreSQL/servers/firewallRules@2017-12-01' = [for rule in firewallrules: {
-  name: '${server.name}/${rule.Name}'
-  properties: {
-    startIpAddress: rule.StartIpAddress
-    endIpAddress: rule.EndIpAddress
-  }
-}]

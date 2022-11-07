@@ -1,5 +1,6 @@
 using Azure.Storage.Blobs;
 using Azure.Storage.Queues;
+using Dapr.Client;
 using delivery.models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,11 +15,20 @@ public class DeliveryController : ControllerBase
     private readonly IConfiguration _config;
     private readonly string containerName = "advtechcontainerblob";
     private readonly string queueName = "orders";
+    #region Dapr part
+    private DaprClient daprClient;
+    string pubsub = "process-order";
+    #endregion
+    private const string storeName = "uploadblobapp";
 
     public DeliveryController(ILogger<DeliveryController> logger, IConfiguration config)
     {
         _logger = logger;
         _config = config;
+        
+        #region Dapr part
+        daprClient = new DaprClientBuilder().Build();
+        #endregion
     }
 
     [HttpGet]
@@ -32,6 +42,28 @@ public class DeliveryController : ControllerBase
     [Route("upload/{filename}")]
     public async Task UploadImage([FromBody] string file, string filename)
     {
+        #region Dapr Side
+        //Upload file
+        var task = daprClient.SaveStateAsync(storeName, filename, file);
+        task.Wait();
+        if (task.IsCompletedSuccessfully)
+        {
+            _logger.LogInformation("File is uploaded - " + filename);
+
+            //Using Dapr SDK to publish a message
+            OrderModel order = new OrderModel()
+            {
+                id = Guid.NewGuid(),
+                date = DateTime.Now.ToString(),
+                invoiceId = Guid.NewGuid()
+            };
+            
+            await daprClient.InvokeBindingAsync(pubsub, "create", order);
+        }
+
+        #endregion
+
+        /*#region Blob part
         BlobServiceClient blobServiceClient = new BlobServiceClient(_config["AzureBlobStorage:ConnectionString"]);
         BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
         BlobClient blobClient = containerClient.GetBlobClient(filename);
@@ -56,5 +88,6 @@ public class DeliveryController : ControllerBase
                 queueClient.SendMessage(System.Convert.ToBase64String(plainTextBytes));
             }
         }
+        #endregion*/
     }
 }

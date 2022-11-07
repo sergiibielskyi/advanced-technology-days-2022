@@ -31,5 +31,11 @@ C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\obj\Deb
 C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\obj\Debug\net6.0\delivery.pdb
 C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\obj\Debug\net6.0\delivery.genruntimeconfig.cache
 C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\obj\Debug\net6.0\ref\delivery.dll
-C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Azure.Storage.Queues.dll
 C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Dapr.Client.dll
+C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Google.Api.CommonProtos.dll
+C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Google.Protobuf.dll
+C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Grpc.Core.Api.dll
+C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Grpc.Net.Client.dll
+C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Grpc.Net.Common.dll
+C:\Users\serge\Documents\code\advanced-technology-days-2022\api\delivery\bin\Debug\net6.0\Azure.Storage.Queues.dll
