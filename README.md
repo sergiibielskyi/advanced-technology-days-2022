@@ -13,7 +13,7 @@ az ad sp create --id "<app id>"
 
 --Update parameters.json file to add objectId from outcome
 
---Deploy initial cloud evironment services
+--Deploy initial cloud environment services
 az deployment group create --resource-group "adv-tech-days" --template-file environment.bicep --parameters parameters.json
 
 --Add permissions to accout and generate certificate
@@ -28,8 +28,17 @@ dotnet user-secrets set "AzureServiceBus:Queue" "<Connection String>"
 docker build --platform linux/amd64 -t delivery:latest -f ./delivery/dockerfile .
 docker build --platform linux/amd64 -t operatons:latest -f ./operations/dockerfile .
 
+--Start dapr apps
 dapr run -a deliveryapp -p 60000 -d components -- dotnet run
 
+--start dapr apps with input bindings
 dapr run -a checkoutapp -p 50000 -d components -- dotnet run --urls http://*:50000
 
+--host of using postgresql
 host=advtechsrv.postgres.database.azure.com user="<user>"@advtechsrv.postgres.database.azure.com password="<password>" port=5432 connect_timeout=10 database="<dbName>"
+
+--Deploy delivery container apps
+az deployment group create --resource-group "adv-tech-days" --template-file Delivery/app.bicep
+
+--Deploy Operations container apps
+az deployment group create --resource-group "adv-tech-days" --template-file Operations/app.bicep

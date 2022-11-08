@@ -39,3 +39,5 @@ devops/infra/parameters.json
 api/delivery/components/azurekeyvault.yaml
 api/operations/components/azurekeyvault.yaml
 api/operations/components/cert.pfx
+devops/apps/Operations/config.json
+devops/apps/Delivery/config.json

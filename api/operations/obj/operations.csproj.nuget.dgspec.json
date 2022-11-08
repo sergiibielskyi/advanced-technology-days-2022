@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj": {}
+    "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj": {}
   },
   "projects": {
-    "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj": {
+    "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj",
+        "projectUniqueName": "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj",
         "projectName": "operations",
-        "projectPath": "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj",
+        "projectPath": "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj",
         "packagesPath": "C:\\Users\\serge\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\obj\\",
+        "outputPath": "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\serge\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -1101,11 +1101,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\delivery\\delivery.csproj",
+      "projectUniqueName": "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\delivery\\delivery.csproj",
       "projectName": "delivery",
-      "projectPath": "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\delivery\\delivery.csproj",
+      "projectPath": "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\delivery\\delivery.csproj",
       "packagesPath": "C:\\Users\\serge\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\delivery\\obj\\",
+      "outputPath": "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\delivery\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\serge\\AppData\\Roaming\\NuGet\\NuGet.Config"
