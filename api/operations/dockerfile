@@ -5,12 +5,12 @@ EXPOSE 80
 
 # copy csproj and restore as distinct layers
 WORKDIR /api/operations
-COPY ./operations/operations.csproj ./
+COPY ./operations.csproj ./
 RUN dotnet restore
 
 # copy everything else and build app
 WORKDIR /api
-COPY ./operations/ ./operations/
+COPY ./ ./operations/
 
 WORKDIR /api/operations
 RUN dotnet publish -c release -o operations -r ubuntu.18.04-x64
