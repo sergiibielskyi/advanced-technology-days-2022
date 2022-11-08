@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i9qhtpMt4Xj+/huk6AmN2bYF4V8GLH77z4JEKuKo/YXCmt6t1gB09XYBmpEZ3N0mEGx5F/XlSRuEFAGgnatzlw==",
+  "dgSpecHash": "BPkXxBFZm8PHcdwuqGUB2xnPT6gGP+2Wu9BO9HuOz4QPLNUn/fibrxB7wP0lkTpbb5ZPhPemevJufI/f98JCVQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj",
+  "projectFilePath": "C:\\Users\\serge\\Documents\\code\\advanced-technology-days-2022\\api\\operations\\operations.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\serge\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\serge\\.nuget\\packages\\azure.storage.common\\12.13.0\\azure.storage.common.12.13.0.nupkg.sha512",

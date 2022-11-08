@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Dapr.Client;
 
 namespace operations.Controllers;
 
@@ -7,21 +6,9 @@ namespace operations.Controllers;
 public class OperationsController : ControllerBase
 {
     private readonly ILogger<OperationsController> _logger;
-    DaprClient daprClient;
-    string storeName = "postgresqlapp";
-
+    
     public OperationsController(ILogger<OperationsController> logger)
     {
         _logger = logger;
-        daprClient = new DaprClientBuilder().Build();
     }
-
-    [HttpPost("/checkout")]
-    public void getCheckout([FromBody] object order)
-    {
-        _logger.LogInformation("Order is comming - " + order.ToString());
-
-        daprClient.SaveStateAsync(storeName, Guid.NewGuid().ToString(), order);
-    }
-
 }
