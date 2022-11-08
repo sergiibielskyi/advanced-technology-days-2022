@@ -5,7 +5,7 @@ EXPOSE 80
 
 # copy csproj and restore as distinct layers
 WORKDIR /api/operations
-COPY ./operations.csproj ./
+COPY operations.csproj ./
 RUN dotnet restore
 
 # copy everything else and build app
