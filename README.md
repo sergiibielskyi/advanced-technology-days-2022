@@ -42,3 +42,8 @@ az deployment group create --resource-group "adv-tech-days" --template-file Deli
 
 --Deploy Operations container apps
 az deployment group create --resource-group "adv-tech-days" --template-file Operations/app.bicep
+
+--To configure CD needs to change path to docker file
+e.g.
+          file: ./api/operations/dockerfile
+          context: ./api
