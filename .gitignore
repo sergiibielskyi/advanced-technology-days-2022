@@ -43,3 +43,6 @@ api/delivery/components/cert.pfx
 devops/apps/Operations/config.json
 devops/apps/Delivery/config.json
 gitpod.md
+api/delivery/bin/*
+api/operations/bin/*
+

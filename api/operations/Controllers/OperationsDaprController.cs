@@ -8,7 +8,7 @@ public class OperationsDaprController : ControllerBase
 {
     private readonly ILogger<OperationsDaprController> _logger;
     DaprClient daprClient;
-    string storeName = "postgresqlapp";
+    string storeName = "cosmosdbapp";
 
     public OperationsDaprController(ILogger<OperationsDaprController> logger)
     {
