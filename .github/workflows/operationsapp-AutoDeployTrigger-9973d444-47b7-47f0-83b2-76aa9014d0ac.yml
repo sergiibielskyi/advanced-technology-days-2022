@@ -36,8 +36,8 @@ jobs:
         with:
           push: true
           tags: advtechregistry.azurecr.io/operations:${{ github.sha }}
-          file: ./Dockerfile
-          context: ./
+          file: ./api/operations/dockerfile
+          context: ./api
 
 
   deploy:
