@@ -8,7 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Using background tasks to process
-//builder.Services.AddHostedService<operations.WorkerService>();
+builder.Services.AddHostedService<operations.WorkerService>();
 
 var app = builder.Build();
 
