@@ -47,3 +47,11 @@ az deployment group create --resource-group "adv-tech-days" --template-file Oper
 e.g.
           file: ./api/operations/dockerfile
           context: ./api
+
+--edit text file via vim
+apt-get update
+apt-get install vim
+vim appconfig.json
+escape
+:wq
+
